@@ -314,9 +314,14 @@ final public class Koyomi: UICollectionView {
     }
     
     // MARK: - Public Methods -
-    
     public func display(in month: MonthType) {
         model.display(in: month)
+        reloadData()
+        calendarDelegate?.koyomi?(self, currentDateString: model.dateString(in: .current, withFormat: currentDateFormat))
+    }
+    
+    public func displayDate(_ date: Date) {
+        model.displayDate(date)
         reloadData()
         calendarDelegate?.koyomi?(self, currentDateString: model.dateString(in: .current, withFormat: currentDateFormat))
     }

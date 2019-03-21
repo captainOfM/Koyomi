@@ -104,6 +104,12 @@ final class DateModel: NSObject {
         setup()
     }
     
+    func displayDate(_ date: Date) {
+        currentDates = []
+        currentDate = date
+        setup()
+    }
+    
     func dateString(in month: MonthType, withFormat format: String) -> String {
         let formatter: DateFormatter = .init()
         formatter.dateFormat = format
@@ -332,6 +338,11 @@ private extension DateModel {
         currentDates
             .filter { fromDate <= $0 && toDate >= $0 }
             .forEach { selectedDates[$0] = isSelected }
+        
+        if selectionMode == .sequence {
+            sequenceDates.start = fromDate
+            sequenceDates.end = toDate
+        }
     }
     
     func atBeginning(of month: MonthType) -> Date {
@@ -350,5 +361,5 @@ private extension DateModel {
             }
         }()
         return calendar.date(byAdding: components, to: currentDate) ?? Date()
-    }
+    }    
 }
