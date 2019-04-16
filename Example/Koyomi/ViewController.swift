@@ -247,5 +247,14 @@ extension ViewController: KoyomiDelegate {
         }
         return true
     }
+    
+    func koyomi(_ koyomi: Koyomi, calendarDidTouchedWith gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == UISwipeGestureRecognizer.Direction.right {
+            print("Swipe Right")
+        }
+        else if gesture.direction == UISwipeGestureRecognizer.Direction.left {
+            print("Swipe Left")
+        }
+    }
 }
 

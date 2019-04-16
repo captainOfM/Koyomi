@@ -72,6 +72,8 @@ import UIKit
      */
     @objc optional func koyomi(_ koyomi: Koyomi, fontForItemAt indexPath: IndexPath, date: Date) -> UIFont?
     
+    @objc optional func koyomi(_ koyomi: Koyomi, calendarDidTouchedWith gesture: UISwipeGestureRecognizer)
+    
 }
 
 // MARK: - KoyomiStyle -
@@ -297,6 +299,14 @@ final public class Koyomi: UICollectionView {
         super.init(coder: aDecoder)
         configure()
         collectionViewLayout = layout
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeLeft.direction = .left
+        self.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeRight.direction = .right
+        self.addGestureRecognizer(swipeRight)
     }
     
     // Internal initializer for @IBDesignable
@@ -311,6 +321,7 @@ final public class Koyomi: UICollectionView {
         self.inset = inset
         self.weekCellHeight = weekCellHeight
         configure()
+        
     }
     
     // MARK: - Public Methods -
@@ -384,6 +395,10 @@ final public class Koyomi: UICollectionView {
         model.setHighlightedDates(from: date, to: toDate)
         highlightedDayBackgrondColor = backgroundColor
         return self
+    }
+    
+   @objc private func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+       calendarDelegate?.koyomi?(self, calendarDidTouchedWith: gesture)
     }
     
     // MARK: - Override Method -
