@@ -26,6 +26,13 @@ class ViewController: UIViewController {
                 .setWeekFont(size: 10)
         }
     }
+    
+    let koyomi2 = Koyomi(frame: CGRect(x: 0, y: 500 , width: 300, height: 300),
+                                  sectionSpace: 10,
+                                  cellSpace: 0.0,
+                                  inset: .zero,
+                                  weekCellHeight: 25)
+    
     @IBOutlet fileprivate weak var currentDateLabel: UILabel!
     
     fileprivate let invalidPeriodLength = 90
@@ -137,7 +144,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         currentDateLabel.text = koyomi.currentDateString()
+        currentDateLabel.text = koyomi2.currentDateString()
+        
+        koyomi2.circularViewDiameter = 0.2
+        koyomi2.calendarDelegate = self
+        koyomi2.inset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        koyomi2.weeks = ("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
+        koyomi2.style = .standard
+        koyomi2.dayPosition = .center
+        koyomi2.selectionMode = .sequence(style: .semicircleEdge)
+        koyomi2.selectedStyleColor = UIColor(red: 203/255, green: 119/255, blue: 223/255, alpha: 1)
+        koyomi2
+            .setDayFont(size: 14)
+            .setWeekFont(size: 10)
+        
+        self.view.addSubview(koyomi2)
     }
+    
+    
     
     // MARK: - Utility -
 

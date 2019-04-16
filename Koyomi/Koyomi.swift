@@ -300,13 +300,13 @@ final public class Koyomi: UICollectionView {
         configure()
         collectionViewLayout = layout
         
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
-        swipeLeft.direction = .left
-        self.addGestureRecognizer(swipeLeft)
-        
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
-        swipeRight.direction = .right
-        self.addGestureRecognizer(swipeRight)
+//        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+//        swipeLeft.direction = .left
+//        self.addGestureRecognizer(swipeLeft)
+//
+//        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+//        swipeRight.direction = .right
+//        self.addGestureRecognizer(swipeRight)
     }
     
     // Internal initializer for @IBDesignable
@@ -321,7 +321,6 @@ final public class Koyomi: UICollectionView {
         self.inset = inset
         self.weekCellHeight = weekCellHeight
         configure()
-        
     }
     
     // MARK: - Public Methods -
@@ -410,6 +409,13 @@ final public class Koyomi: UICollectionView {
     
     override public func layoutSubviews() {
         super.layoutSubviews()
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeLeft.direction = .left
+        self.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeRight.direction = .right
+        self.addGestureRecognizer(swipeRight)
         sectionSeparator.frame = CGRect(x: inset.left, y: inset.top + weekCellHeight, width: frame.width - (inset.top + inset.left), height: sectionSpace)
     }
 }
