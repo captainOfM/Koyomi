@@ -390,6 +390,7 @@ final public class Koyomi: UICollectionView {
     @discardableResult
     public func unselectAll() -> Self {
         model.unselectAll()
+        self.reloadData()
         return self
     }
     
